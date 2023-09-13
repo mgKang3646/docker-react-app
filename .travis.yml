@@ -1,0 +1,19 @@
+sudo: required
+
+language: generic
+
+services: 
+ - docker
+
+before_install:
+ - echo "start creating an image with dockerfile"
+ - docker build 0t lok/docker-react-app -f Dockerfile.dev .
+
+script:
+ - docker run -e CI=true lok/docker-react-app npm run test --
+
+after_success:
+ - echo "Test success"
+
+ 
+
